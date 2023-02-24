@@ -18,7 +18,7 @@ public abstract class Veicoli {
         this.tariffaAlMinuto = tariffaAlMinuto;
     }
     public  boolean isDisponibile(int minuti){
-        if(minuti < 5){
+        if(minuti < tempoMinimoMinuti){
             System.out.println("Almeno 5 minuti di corsa");
             return false;
         }
@@ -28,5 +28,9 @@ public abstract class Veicoli {
             System.out.println("Il veicolo è già stato affittato");
 
         return true;
+    }
+
+    public UUID getId(){
+        return id;
     }
 }

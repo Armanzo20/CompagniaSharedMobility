@@ -1,6 +1,10 @@
 import Veicoli.Patenti;
+import Veicoli.Veicoli;
 
+import javax.xml.crypto.Data;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.UUID;
 
@@ -29,6 +33,31 @@ public class Utente {
         credito += amount;
     }
 
+    public HashSet<UUID> cercaVeicolo(){
+        return Database.getDisponibili();
+    }
 
+    public void affitta(UUID veicolo, int min){
+        if(!Database.getDisponibili().contains(veicolo)){
+            System.out.println("id non trovato");
+            return;
+        }
+        Veicoli v_ogg = Database.getVeicoloDaId(veicolo);
+        if(v_ogg.isDisponibile(min)){
+            Database.addAffittati(this.id, veicolo);
+            Database.getDisponibili().remove(veicolo);
+        } else {
+            System.out.println("non trovato");
+        }
 
+    }
+
+    public void restituisci(UUID veicolo){
+        Veicoli v_ogg = Database.getVeicoloDaId(veicolo);
+        Database.addDisponibili(veicolo);
+        Database.getAffittati().remove(this.id, veicolo);
+
+    }
+
+    public void registrati(){//fai questo};
 }
