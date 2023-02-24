@@ -17,4 +17,16 @@ public abstract class Veicoli {
         this.posizione = posizione;
         this.tariffaAlMinuto = tariffaAlMinuto;
     }
+    public  boolean isDisponibile(int minuti){
+        if(minuti < 5){
+            System.out.println("Almeno 5 minuti di corsa");
+            return false;
+        }
+        if(!eAffittato)
+            return true;
+        else
+            System.out.println("Il veicolo è già stato affittato");
+
+        return true;
+    }
 }

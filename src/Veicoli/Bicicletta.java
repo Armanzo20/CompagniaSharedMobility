@@ -7,4 +7,6 @@ public class Bicicletta extends Veicoli {
         super(id, nome, posizione,  tariffaAlMinuto);
         this.serveCasco = true;
     }
+
+
 }
