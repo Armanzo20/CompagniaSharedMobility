@@ -46,6 +46,10 @@ public class Database {
         disponibili.add(v.getId());
     }
 
+    public static void addUtente(Utente u){
+        utenti.add(u);
+    }
+
     public static void addAffittati(UUID id_utente, UUID id_veicolo){
         affittati.put(id_utente, id_veicolo);
     }

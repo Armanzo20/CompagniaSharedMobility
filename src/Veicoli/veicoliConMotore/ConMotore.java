@@ -18,6 +18,11 @@ public abstract class ConMotore extends Veicoli {
     }
 
     @Override
+    public Patenti getPatente() {
+        return patente;
+    }
+
+    @Override
     public boolean isDisponibile(int minuti){
         if(!super.isDisponibile(minuti)){
             return false;

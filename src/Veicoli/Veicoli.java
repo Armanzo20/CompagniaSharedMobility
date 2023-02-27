@@ -30,7 +30,23 @@ public abstract class Veicoli {
         return true;
     }
 
+    public double getTariffaAlMinuto() {
+        return tariffaAlMinuto;
+    }
+
     public UUID getId(){
         return id;
+    }
+
+    public abstract Patenti getPatente();
+
+    @Override
+    public String toString() {
+        return "Veicoli{" +
+        "id=" + id +
+        ", nome='" + nome + '\'' +
+        ", posizione='" + posizione + '\'' +
+        ", tariffaAlMinuto=" + tariffaAlMinuto +
+        '}';
     }
 }

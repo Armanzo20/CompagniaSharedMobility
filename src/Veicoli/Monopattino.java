@@ -20,4 +20,9 @@ public class Monopattino extends Veicoli {
             return true;
         return false;
     }
+
+    @Override
+    public Patenti getPatente() {
+        return null;
+    }
 }

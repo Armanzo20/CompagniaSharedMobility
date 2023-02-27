@@ -8,5 +8,10 @@ public class Bicicletta extends Veicoli {
         this.serveCasco = true;
     }
 
+    @Override
+    public Patenti getPatente() {
+        return null;
+    }
+
 
 }
