@@ -3,19 +3,19 @@ package Veicoli;
 import java.util.UUID;
 
 public abstract class Veicoli {
-    protected UUID id ;
-    protected String nome;
-    protected String posizione;
+    protected final UUID id ;
+    protected final String nome;
+    protected final String posizione;
     protected boolean serveCasco = false;
-    protected double tariffaAlMinuto;
+    protected final double tariffaAlMinuto;
     protected boolean eAffittato = false;
     protected final int tempoMinimoMinuti = 5 ;
 
-    public Veicoli(UUID id, String nome, String posizione,  double tariffaAlMinuto) {
-        this.id = id;
-        this.nome = nome;
-        this.posizione = posizione;
-        this.tariffaAlMinuto = tariffaAlMinuto;
+    protected Veicoli(VeicoliBuilder v){
+        this.id = UUID.randomUUID();
+        this.nome = v.getNome();
+        this.posizione = v.getPosizione();
+        this.tariffaAlMinuto = v.getTariffaAlMinuto();
     }
     public  boolean isDisponibile(int minuti){
         if(minuti < tempoMinimoMinuti){

@@ -1,27 +1,29 @@
 import Veicoli.Patenti;
-import Veicoli.Veicoli;
+import Veicoli.*;
 
 import java.util.HashSet;
 import java.util.UUID;
 
 public class Utente {
 
-    private UUID id;
-    private String nome,cognome,codice_fiscale;
+    private final UUID id;
+    private final String nome,cognome,codice_fiscale;
     private double credito;
 
-    private boolean haCasco;
-    private String datadinascita;
+    private final boolean haCasco;
+    private final String datadinascita;
 
-    private HashSet<Patenti> patenti;
+    private HashSet<Patenti> patenti = new HashSet<Patenti>();
 
-    public Utente(String nome, String cognome, String codice_fiscale, boolean haCasco, String datadinascita) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.codice_fiscale = codice_fiscale;
+
+    protected Utente(UserBuilder u){
+        this.id = UUID.randomUUID();
+        this.nome = u.getNome();
+        this.cognome = u.getCognome();
+        this.codice_fiscale = u.getCodice_fiscale();
         this.credito = 0;
-        this.haCasco = haCasco;
-        this.datadinascita = datadinascita;
+        this.datadinascita = u.getDataDiNascita();
+        this.haCasco = u.getHaCasco();
     }
 
     public void addPatente(Patenti patente){
