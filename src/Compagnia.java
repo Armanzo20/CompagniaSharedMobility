@@ -18,12 +18,12 @@ public class Compagnia {
   }
 
   public void registra(Utente u){
-    Database.addUtente(u);
+    Database.getInstance().addUtente(u);
   }
 
   public HashSet<Veicoli> cercaVeicoli(){
     HashSet<Veicoli> veicoli = new HashSet<>();
-    for (UUID veicolo : Database.getDisponibili()) {
+    for (UUID veicolo : Database.getInstance().getDisponibili()) {
       veicoli.add(Database.getVeicoloDaId(veicolo));
     }
     return veicoli;
@@ -31,6 +31,6 @@ public class Compagnia {
 
   public void restituisci(UUID idUtente, UUID idVeicolo){
     Database.addDisponibili(idVeicolo);
-    Database.getAffittati().remove(idUtente, idVeicolo);
+    Database.getInstance().getAffittati().remove(idUtente, idVeicolo);
   }
 }

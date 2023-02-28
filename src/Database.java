@@ -11,6 +11,8 @@ import Veicoli.*;
 import Veicoli.veicoliConMotore.ConMotore;
 
 public class Database {
+
+    private static Database database;
     private static HashSet<Veicoli> id_veicoli;
 
     private static HashSet<UUID> disponibili;
@@ -19,7 +21,7 @@ public class Database {
 
     private static HashSet<Utente> utenti;
 
-    private Path usersCsv ;
+    private static Path usersCsv ;
 
 
 
@@ -42,6 +44,13 @@ public class Database {
 
     }
 
+    public static Database getInstance(){
+        if (database != null){
+            return database;
+        }
+        database = new Database(usersCsv);
+        return database;
+    }
 
 
     public static void addDisponibili(UUID id){
@@ -60,15 +69,15 @@ public class Database {
         return null;
     }
 
-    public static HashSet<Veicoli> getId_veicoli() {
+    public HashSet<Veicoli> getId_veicoli() {
         return id_veicoli;
     }
 
-    public static HashSet<UUID> getDisponibili() {
+    public HashSet<UUID> getDisponibili() {
         return disponibili;
     }
 
-    public static HashMap<UUID, UUID> getAffittati() {
+    public HashMap<UUID, UUID> getAffittati() {
         return affittati;
     }
 
@@ -87,7 +96,7 @@ public class Database {
 
     }
 
-    public static void addAffittati(UUID id_utente, UUID id_veicolo){
+    public void addAffittati(UUID id_utente, UUID id_veicolo){
         affittati.put(id_utente, id_veicolo);
     }
 }

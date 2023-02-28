@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.UUID;
 
-public class Utente {
+public class Utente implements Observer{
 
     private final UUID id;
     private final String nome,cognome,codice_fiscale;
@@ -13,6 +13,8 @@ public class Utente {
 
     private final boolean haCasco;
     private final String datadinascita;
+
+    private ConnectionNotifier connectionNotifier;
 
     private HashSet<Patenti> patenti = new HashSet<Patenti>();
 
@@ -25,6 +27,7 @@ public class Utente {
         this.credito = 0;
         this.datadinascita = u.getDataDiNascita();
         this.haCasco = u.getHaCasco();
+        connectionNotifier.addObserver(this);
     }
 
 
@@ -56,13 +59,13 @@ public class Utente {
         return datadinascita;
     }
 
-    public HashSet<Veicoli.Patenti> getPatenti() {
+    public HashSet<Patenti> getPatenti() {
         return patenti;
     }
 
-    public void addPatente(Patenti patente){
+    /*public void addPatente(Patenti patente){
         this.patenti.add(patente);
-    }
+    }*/
 
     public void ricarica(double amount){
         credito += amount;
@@ -107,6 +110,13 @@ public class Utente {
         String[] values = userCsv.split(",");
         Utente u = (new UserBuilder().ID().nome(values[0]).cognome(values[1]).codice_fiscale(values[2]).dataDiNascita(values[3]).haCasco(Boolean.parseBoolean(values[4])).build());
         return u;
+    }
+
+    @Override
+    public void notifyMe(Observable o) {
+        if (credito <= 0) {
+            System.out.println("Credito insufficente");
+        }
     }
 
 }

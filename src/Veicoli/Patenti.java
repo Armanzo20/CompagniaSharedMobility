@@ -1,5 +1,5 @@
 package Veicoli;
 
-public enum Patenti {
+public enum Patenti{
     AUTOMOBILE, SCOOTER, FURGONCINO
 }
