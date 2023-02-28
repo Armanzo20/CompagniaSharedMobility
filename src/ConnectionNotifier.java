@@ -20,7 +20,7 @@ public class ConnectionNotifier implements Observable {
 
     public void notifyObservers() {
         for (Observer o : observers) {
-            o.notifyMe(this);
+            o.notifyMe(this, "Credito insufficente");
         }
     }
 }

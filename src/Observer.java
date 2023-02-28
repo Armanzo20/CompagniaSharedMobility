@@ -1,3 +1,3 @@
 public interface Observer {
-    public void notifyMe(Observable o);
+    public void notifyMe(Observable o, String mesage);
 }

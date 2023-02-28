@@ -2,10 +2,15 @@ package Veicoli;
 
 import Veicoli.veicoliConMotore.Automobile;
 
+import java.util.UUID;
+
 public class VeicoliBuilder {
+
   private String nome;
   private String posizione;
   private double tariffaAlMinuto;
+
+  private UUID id ;
 
   public VeicoliBuilder(){}
 
@@ -25,6 +30,11 @@ public class VeicoliBuilder {
     return this;
   }
 
+  public VeicoliBuilder ID(){
+    this.id = UUID.randomUUID();
+    return this;
+  }
+
   public String getNome() {
     return nome;
   }
@@ -35,6 +45,10 @@ public class VeicoliBuilder {
 
   public double getTariffaAlMinuto() {
     return tariffaAlMinuto;
+  }
+
+  public Veicoli buildVeicolo(){
+    return new Veicoli(this);
   }
 
   public Bicicletta buildBicicletta(){

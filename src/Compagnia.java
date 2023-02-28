@@ -30,7 +30,7 @@ public class Compagnia {
   }
 
   public void restituisci(UUID idUtente, UUID idVeicolo){
-    Database.addDisponibili(idVeicolo);
-    Database.getInstance().getAffittati().remove(idUtente, idVeicolo);
+    Database.addIDveicoliDisponibili(idVeicolo);
+    Database.getInstance().getIDUtenteVeicoliAffitatti().remove(idUtente, idVeicolo);
   }
 }

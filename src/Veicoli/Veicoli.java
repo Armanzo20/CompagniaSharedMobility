@@ -2,7 +2,7 @@ package Veicoli;
 
 import java.util.UUID;
 
-public abstract class Veicoli {
+public  class Veicoli {
     protected final UUID id ;
     protected final String nome;
     protected final String posizione;
@@ -38,7 +38,18 @@ public abstract class Veicoli {
         return id;
     }
 
-    public abstract Patenti getPatente();
+    public  Patenti getPatente(){
+        return null;
+    };
+
+
+
+    public static Veicoli parseCsv(String veioliCsv) {
+        String[] values = veioliCsv.split(",");
+        Veicoli v = (new VeicoliBuilder().ID().nome(values[0]).posizione(values[1]).tariffaAlMinuto(Double.parseDouble(values[2])).buildVeicolo());
+        return v;
+    }
+
 
     @Override
     public String toString() {

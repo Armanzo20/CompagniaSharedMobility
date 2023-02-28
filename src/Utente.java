@@ -84,18 +84,18 @@ public class Utente implements Observer{
     }
 
     public void affitta(UUID veicolo, int min){
-        /*if(!Database.getDisponibili().contains(veicolo)){
+        if(!Database.getInstance().getDisponibili().contains(veicolo)){
             System.out.println("id non trovato");
             return;
-        }*/
+        }
         Veicoli v_ogg = Database.getVeicoloDaId(veicolo);
         if(this.credito > (v_ogg.getTariffaAlMinuto() * min)) {
-            /*if (v_ogg.isDisponibile(min)) {
-                Database.addAffittati(this.id, veicolo);
-                Database.getDisponibili().remove(veicolo);
+            if (v_ogg.isDisponibile(min)) {
+                Database.getInstance().addAffittati(this.id, veicolo);
+                Database.getInstance().getDisponibili().remove(veicolo);
             } else {
                 System.out.println("non trovato");
-            }*/
+            }
         }
         else System.out.println("Ti mancano " + ((v_ogg.getTariffaAlMinuto() * min) - this.credito));
 
@@ -113,10 +113,7 @@ public class Utente implements Observer{
     }
 
     @Override
-    public void notifyMe(Observable o) {
-        if (credito <= 0) {
-            System.out.println("Credito insufficente");
-        }
-    }
+    public void notifyMe(Observable o, String mesage) {
 
+    }
 }
