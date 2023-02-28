@@ -6,8 +6,10 @@ public class UserBuilder {
   private String nome,cognome,codice_fiscale;
   private String dataDiNascita;
   private boolean haCasco = false;
+  private UUID  id ;
 
-  public UserBuilder(){}
+  public UserBuilder(){
+  }
 
   public UserBuilder nome(String nome){
     this.nome = nome;
@@ -50,6 +52,11 @@ public class UserBuilder {
   }
   public boolean getHaCasco(){
     return this.haCasco;
+  }
+
+  public UserBuilder ID(){
+    this.id = UUID.randomUUID();
+    return this;
   }
 
   public Utente build(){

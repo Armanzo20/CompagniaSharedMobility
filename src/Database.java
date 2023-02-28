@@ -1,7 +1,14 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.UUID;
 import Veicoli.*;
+import Veicoli.veicoliConMotore.ConMotore;
 
 public class Database {
     private static HashSet<Veicoli> id_veicoli;
@@ -11,6 +18,30 @@ public class Database {
     private static HashMap<UUID, UUID> affittati;
 
     private static HashSet<Utente> utenti;
+
+    private Path usersCsv ;
+
+
+
+    private Database(Path usersCsv) {
+        this.usersCsv = usersCsv;
+        this.utenti = new HashSet<>();
+
+        try {
+            if (!Files.exists(usersCsv))
+                Files.createFile(usersCsv);
+        } catch (IOException e) { e.printStackTrace(); }
+
+        try (BufferedReader br = Files.newBufferedReader(usersCsv)) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                this.utenti.add(Utente.parseCsv(line));
+            }
+        }
+        catch (IOException e) { e.printStackTrace(); }
+
+    }
+
 
 
     public static void addDisponibili(UUID id){
@@ -46,8 +77,14 @@ public class Database {
         disponibili.add(v.getId());
     }
 
-    public static void addUtente(Utente u){
+    public  void addUtente(Utente u){
         utenti.add(u);
+        try(BufferedWriter bw = Files.newBufferedWriter(this.usersCsv)) {
+            bw.write(u.getId() + ";" + u.getNome() + ";" + u.getCognome() + ";" + u.getCodice_fiscale() + ";"+ u.getDatadinascita() +";"+ u.isHaCasco() + ";" + u.isHaCasco());
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
+
     }
 
     public static void addAffittati(UUID id_utente, UUID id_veicolo){

@@ -1,6 +1,7 @@
 import Veicoli.Patenti;
 import Veicoli.*;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.UUID;
 
@@ -24,6 +25,39 @@ public class Utente {
         this.credito = 0;
         this.datadinascita = u.getDataDiNascita();
         this.haCasco = u.getHaCasco();
+    }
+
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCognome() {
+        return cognome;
+    }
+
+    public String getCodice_fiscale() {
+        return codice_fiscale;
+    }
+
+    public double getCredito() {
+        return credito;
+    }
+
+    public boolean isHaCasco() {
+        return haCasco;
+    }
+
+    public String getDatadinascita() {
+        return datadinascita;
+    }
+
+    public HashSet<Veicoli.Patenti> getPatenti() {
+        return patenti;
     }
 
     public void addPatente(Patenti patente){
@@ -67,4 +101,12 @@ public class Utente {
     public void restituisci(UUID veicolo){
         Compagnia.getInstance().restituisci(this.id, veicolo);
     }
+
+
+    public static Utente parseCsv(String userCsv) {
+        String[] values = userCsv.split(",");
+        Utente u = (new UserBuilder().ID().nome(values[0]).cognome(values[1]).codice_fiscale(values[2]).dataDiNascita(values[3]).haCasco(Boolean.parseBoolean(values[4])).build());
+        return u;
+    }
+
 }
