@@ -33,4 +33,18 @@ public class Compagnia {
     Database.addIDveicoliDisponibili(idVeicolo);
     Database.getInstance().getIDUtenteVeicoliAffitatti().remove(idUtente, idVeicolo);
   }
+
+
+  public void aggiungiNoleggio(Noleggio n){
+    Database.getInstance().getDisponibili().remove(n.getVeicolo().getId());
+    Database.getInstance().addAffittati(n.getUtente().getId(), n.getVeicolo().getId());
+    Database.getInstance().getNoleggi().add(n);
+  }
+
+  public void fineNoleggio(Noleggio n){
+    Database.getInstance().getDisponibili().add(n.getVeicolo().getId());
+    Database.getInstance().removeAffittati(n.getUtente().getId());
+
+  }
+
 }

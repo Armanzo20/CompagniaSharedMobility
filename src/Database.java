@@ -21,6 +21,7 @@ public class Database {
 
     private static HashSet<Utente> utenti;
 
+    private static HashSet<Noleggio> noleggi;
     private static Path usersCsv ;
 
     private static Path veicoliCsv;
@@ -97,6 +98,10 @@ public class Database {
         return IDUtenteVeicoliAffitatti;
     }
 
+    public static HashSet<Noleggio> getNoleggi() {
+        return noleggi;
+    }
+
     public static void add(Veicoli v){
         veicoli.add(v);
         IDveicoliDisponibili.add(v.getId());
@@ -111,8 +116,12 @@ public class Database {
         }
 
     }
-
     public void addAffittati(UUID id_utente, UUID id_veicolo){
         IDUtenteVeicoliAffitatti.put(id_utente, id_veicolo);
     }
+
+    public void removeAffittati(UUID id_utente){
+        IDUtenteVeicoliAffitatti.remove(id_utente);
+    }
+
 }
